@@ -1,0 +1,416 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+/* Effet de typing */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.typing-animation {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #00fff9;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+.deadsec-container {
+  position: relative;
+  background: #0a0a0f;
+  overflow: hidden;
+}
+
+.glitch-deadsec {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: screen;
+}
+
+.glitch-copy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: screen;
+  filter: contrast(150%) brightness(120%);
+}
+
+.glitch-copy:nth-child(1) {
+  animation: glitch-1 2s infinite linear alternate-reverse;
+  opacity: 0.7;
+  mix-blend-mode: color-dodge;
+}
+
+.glitch-copy:nth-child(2) {
+  animation: glitch-2 3s infinite linear alternate-reverse;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+.glitch-copy:nth-child(3) {
+  animation: glitch-3 2.5s infinite linear alternate-reverse;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  filter: hue-rotate(90deg);
+}
+
+.glitch-copy:nth-child(4) {
+  animation: glitch-4 4s infinite linear alternate-reverse;
+  opacity: 0.3;
+  mix-blend-mode: difference;
+}
+
+.glitch-copy:nth-child(5) {
+  background: linear-gradient(45deg, #00fff9, #FF00FF);
+  mix-blend-mode: color-dodge;
+  animation: pulse 4s infinite;
+  opacity: 0.4;
+}
+
+/* Animations des glitches */
+@keyframes glitch-1 {
+  0% { 
+    transform: translate(0); 
+    filter: hue-rotate(0deg) brightness(150%) contrast(150%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  33% { 
+    transform: translate(2px, -2px); 
+    filter: hue-rotate(90deg) saturate(200%) brightness(200%);
+    clip-path: polygon(5% 5%, 95% 5%, 95% 95%, 5% 95%);
+  }
+  66% { 
+    transform: translate(-2px, 2px); 
+    filter: hue-rotate(180deg) saturate(150%) contrast(200%);
+    clip-path: polygon(0 10%, 100% 0, 90% 90%, 0 100%);
+  }
+  100% { 
+    transform: translate(0); 
+    filter: hue-rotate(360deg) brightness(150%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes glitch-2 {
+  0% { 
+    transform: translate(0); 
+    filter: brightness(100%) saturate(150%);
+    clip-path: inset(10% 0 90% 0);
+  }
+  50% { 
+    transform: translate(-3px, 1px); 
+    filter: brightness(200%) saturate(200%) hue-rotate(90deg);
+    clip-path: inset(40% 0 40% 0);
+  }
+  100% { 
+    transform: translate(3px, -1px); 
+    filter: brightness(150%) saturate(300%);
+    clip-path: inset(80% 0 10% 0);
+  }
+}
+
+@keyframes glitch-3 {
+  0% { transform: skew(0deg); filter: contrast(100%); }
+  33% { transform: skew(2deg); filter: contrast(150%); }
+  66% { transform: skew(-2deg); filter: contrast(200%); }
+  100% { transform: skew(0deg); filter: contrast(100%); }
+}
+
+@keyframes glitch-4 {
+  0% { transform: scale(1) rotate(0deg); }
+  33% { transform: scale(1.05) rotate(0.5deg); }
+  66% { transform: scale(0.95) rotate(-0.5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes glitch-5 {
+  0% { transform: translate(0); filter: blur(0px); }
+  50% { transform: translate(1px, -1px); filter: blur(1px); }
+  100% { transform: translate(-1px, 1px); filter: blur(0px); }
+}
+
+@keyframes scan {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+.deadsec-overlay {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 249, 0.1) 0%,
+      rgba(0, 255, 249, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 249, 0.1) 0%, transparent 80%),
+    linear-gradient(0deg, rgba(255, 0, 255, 0.05) 0%, transparent 100%);
+  animation: overlay-pulse 4s infinite alternate;
+}
+
+@keyframes overlay-pulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+/* Animation du curseur de typing */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00fff9 }
+}
+
+/* Effet de flou lumineux */
+.glow {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 249, 0.5));
+}
+
+/* Effet de distorsion au hover */
+.hover-distort:hover {
+  animation: distort 0.5s infinite;
+}
+
+@keyframes distort {
+  0% {
+    transform: skew(0deg);
+  }
+  20% {
+    transform: skew(2deg);
+  }
+  40% {
+    transform: skew(-2deg);
+  }
+  60% {
+    transform: skew(1deg);
+  }
+  80% {
+    transform: skew(-1deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text:hover {
+  animation: glitch 0.5s infinite;
+  text-shadow: 2px 0 #FF00FF, -2px 0 #00fff9;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Animation de scan pour le terminal */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+/* Mode Matrix */
+.matrix-mode {
+  position: relative;
+}
+
+.matrix-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, rgba(0, 255, 249, 0.1) 25%, transparent);
+  animation: matrix 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes matrix {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Animation pour les connexions de la timeline */
+@keyframes connection-pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+.timeline-connection {
+  animation: connection-pulse 2s infinite;
+}
+
+/* Animation pour les points de la timeline */
+@keyframes node-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 249, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 255, 249, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 249, 0); }
+}
+
+.timeline-node {
+  animation: node-pulse 2s infinite;
+}
+
+/* Désactiver le curseur personnalisé sur mobile */
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* Exceptions pour certains éléments */
+input, textarea, [contenteditable] {
+  cursor: text !important;
+}
+
+button, a, select, [role="button"] {
+  cursor: pointer !important;
+}
+
+/* Animation de transition entre sections */
+.section-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.section-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.section-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+/* Effet Ultra Glitch */
+.ultra-glitch {
+  animation: ultra-glitch 0.2s infinite;
+}
+
+@keyframes ultra-glitch {
+  0% {
+    filter: hue-rotate(0deg) saturate(200%);
+    transform: translate(0);
+  }
+  20% {
+    filter: hue-rotate(90deg) saturate(300%);
+    transform: translate(2px, -2px);
+  }
+  40% {
+    filter: hue-rotate(180deg) saturate(200%);
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    filter: hue-rotate(270deg) saturate(400%);
+    transform: translate(1px, 1px);
+  }
+  80% {
+    filter: hue-rotate(360deg) saturate(300%);
+    transform: translate(-1px, -1px);
+  }
+}
+
+/* Effet sonore */
+.sound-wave {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 255, 249, 0.2);
+  animation: sound-pulse 1s infinite;
+}
+
+@keyframes sound-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* Animation de glitch pour la navigation */
+@keyframes glitch-small {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(-2px);
+    opacity: 0.8;
+  }
+  40% {
+    transform: translateX(2px);
+    opacity: 0.9;
+  }
+  60% {
+    transform: translateX(-1px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(1px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-glitch-small {
+  animation: glitch-small 0.3s infinite;
+}
