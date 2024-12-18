@@ -22,13 +22,28 @@ const DynamicFooter = () => {
   }, []);
 
   const socialLinks = [
-    { icon: Github, url: 'https://github.com/votre-compte', label: 'GitHub' },
-    { icon: Linkedin, url: 'https://linkedin.com/in/votre-profil', label: 'LinkedIn' },
-    { icon: Mail, url: 'mailto:votre@email.com', label: 'Email' }
+    { 
+      icon: Github, 
+      url: 'https://github.com/Thomas-Savelli', 
+      label: 'GitHub' 
+    },
+    { 
+      icon: Linkedin, 
+      url: 'https://www.linkedin.com/in/thomas-savelli', 
+      label: 'LinkedIn' 
+    },
+    { 
+      icon: Mail, 
+      url: 'mailto:thomas.savelli@corsdev.com', 
+      label: 'Email' 
+    }
   ];
 
   return (
-    <footer className="bg-deadsec-dark border-t border-deadsec-blue/30 relative overflow-hidden">
+    <footer className={`
+      bg-deadsec-dark border-t border-deadsec-blue/30
+      ${window.innerWidth <= 768 ? 'pb-24' : 'pb-6'}
+    `}>
       {/* Effet de scan */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deadsec-blue/5 to-transparent opacity-30 animate-scan"></div>
 
@@ -86,6 +101,7 @@ const DynamicFooter = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative"
+                  aria-label={label}
                 >
                   <div className="absolute inset-0 bg-deadsec-blue/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <Icon className="w-6 h-6 text-deadsec-blue hover:text-deadsec-purple transition-colors relative z-10" />

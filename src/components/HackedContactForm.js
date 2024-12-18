@@ -71,7 +71,11 @@ const HackedContactForm = () => {
   };
 
   return (
-    <div className="bg-deadsec-dark border border-deadsec-blue/30 p-6 rounded-sm relative overflow-hidden">
+    <div className="
+      bg-deadsec-dark border border-deadsec-blue/30 
+      p-4 md:p-6 rounded-sm relative overflow-hidden
+      w-full md:w-auto max-w-full md:max-w-none
+    ">
       {/* Effet de scan */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deadsec-blue/5 to-transparent opacity-50 animate-scan"></div>
 
@@ -105,7 +109,7 @@ const HackedContactForm = () => {
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors"
+            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors px-3 py-2 md:py-3"
             placeholder="John Doe"
             required
           />
@@ -119,7 +123,7 @@ const HackedContactForm = () => {
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors"
+            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors px-3 py-2 md:py-3"
             placeholder="john@example.com"
             required
           />
@@ -132,13 +136,13 @@ const HackedContactForm = () => {
           <textarea
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full h-32 bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors resize-none"
+            className="w-full h-32 bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors resize-none px-3 py-2 md:py-3"
             placeholder="Entrez votre message..."
             required
           />
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center scale-75 md:scale-100">
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={RECAPTCHA_CONFIG.siteKey}

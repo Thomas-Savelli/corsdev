@@ -414,3 +414,32 @@ button, a, select, [role="button"] {
 .animate-glitch-small {
   animation: glitch-small 0.3s infinite;
 }
+
+/* Ajoutez ces règles pour le responsive */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Empêcher le débordement horizontal */
+body {
+  overflow-x: hidden;
+}
+
+/* Ajoutez ceci à la fin de votre fichier CSS */
+@media (max-width: 768px) {
+  footer {
+    padding-bottom: 6rem !important; /* Augmenté pour donner plus d'espace */
+  }
+  
+  /* Ajustement spécifique pour la dernière section du footer */
+  footer .border-t:last-child {
+    margin-bottom: 0;
+  }
+}

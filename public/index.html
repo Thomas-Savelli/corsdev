@@ -1,43 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="theme-color" content="#0a0a0f" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Corsdev | Thomas Savelli - Développeur Full Stack en Balagne, Corse</title>
+    <meta name="description" content="Corsdev - Entreprise de développement web en Balagne, Corse. Thomas Savelli, développeur Full Stack spécialisé en React, Python et Django. Solutions digitales sur mesure pour les entreprises corses." />
+    <meta name="keywords" content="Corsdev, développeur full stack, développeur web corse, développeur balagne, react, python, django, L'Île-Rousse, Calvi, Balagne, Corse, applications web, API REST, freelance, Thomas Savelli, entreprise développement web corse" />
+    <meta name="author" content="Corsdev - Thomas Savelli" />
+    <meta name="geo.region" content="FR-2B" />
+    <meta name="geo.placename" content="Balagne, Corse" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://corsdev.com/" />
+    <meta property="og:title" content="Corsdev | Solutions Web en Balagne par Thomas Savelli" />
+    <meta property="og:description" content="Entreprise de développement web basée en Balagne. Solutions digitales sur mesure pour la Corse et au-delà." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="business:contact_data:locality" content="Balagne" />
+    <meta property="business:contact_data:region" content="Corse" />
+    <meta property="business:contact_data:country_name" content="France" />
+
+    <!-- Schema.org markup pour Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Corsdev",
+        "legalName": "Corsdev",
+        "url": "https://corsdev.com",
+        "logo": "https://corsdev.com/logo.png",
+        "founder": {
+          "@type": "Person",
+          "name": "Thomas Savelli",
+          "jobTitle": "Développeur Full Stack",
+          "sameAs": [
+            "https://github.com/Thomas-Savelli",
+            "https://www.linkedin.com/in/thomas-savelli"
+          ]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Corse",
+          "addressLocality": "Balagne",
+          "addressCountry": "FR"
+        },
+        "description": "Entreprise de développement web spécialisée en création d'applications et solutions digitales pour la Corse",
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": "42.5647",
+            "longitude": "8.7573"
+          },
+          "geoRadius": "100000"
+        },
+        "services": [
+          "Développement Web",
+          "Applications sur mesure",
+          "Solutions e-commerce",
+          "Sites web professionnels",
+          "Applications mobiles",
+          "Solutions digitales pour entreprises corses"
+        ],
+        "knowsAbout": [
+          "React.js",
+          "Python",
+          "Django",
+          "API REST",
+          "Développement Web",
+          "Solutions digitales pour la Corse"
+        ]
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
-</html>
+</html> 

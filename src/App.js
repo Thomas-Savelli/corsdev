@@ -97,8 +97,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-deadsec-dark relative overflow-hidden">
-      <HackerNav />
       <ThreeDBackground />
+      <HackerNav className="z-[100]" />
       
       {/* Grille de fond animée - Ajout de pointer-events-none */}
       <div className="fixed inset-0 opacity-5 pointer-events-none">
@@ -112,16 +112,16 @@ function App() {
       {/* Terminal flottant avec z-index élevé */}
       <TerminalComponent isFloating={true} />
 
-      <main>
+      <main className="pt-16 md:pt-20">
         {/* Hero Section */}
         <SectionTransition>
-          <section className="h-[80vh] flex items-center relative pb-0 mt-20">
+          <section className="h-[70vh] flex items-center relative pb-0 mt-10">
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-gradient-to-r from-deadsec-dark via-deadsec-dark/95 to-transparent"></div>
             </div>
             
             <div className="max-w-6xl mx-auto px-4 w-full relative">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div className="space-y-6 font-mono">
                   <div className="inline-flex bg-deadsec-gray/50 px-4 py-2 rounded-sm border border-deadsec-blue/20">
                     <span className="text-deadsec-purple">&gt; </span>
