@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 import useMatrixMode from '../hooks/useMatrixMode';
 import useSoundSystem from '../hooks/useSoundSystem';
@@ -7,13 +7,9 @@ import useNotifications from '../hooks/useNotifications';
 const TerminalComponent = ({ isFloating = false }) => {
   const [commandHistory, setCommandHistory] = useState([]);
   const [currentCommand, setCurrentCommand] = useState('');
-  const [showPrompt, setShowPrompt] = useState(true);
-  const [isTyping, setIsTyping] = useState(false);
-  const inputRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(!isFloating);
   const { startMatrixMode, stopMatrixMode, isMatrixMode } = useMatrixMode();
   const { playSound } = useSoundSystem();
-  const { addNotification } = useNotifications();
-  const [isOpen, setIsOpen] = useState(!isFloating);
 
   const commands = {
     help: `
@@ -157,10 +153,6 @@ const TerminalComponent = ({ isFloating = false }) => {
     ]);
   }, []);
 
-  const handleSuccessfulOperation = () => {
-    addNotification('Compilation réussie !');
-  };
-
   // Fonction pour ouvrir le terminal depuis l'extérieur
   useEffect(() => {
     window.openTerminal = () => setIsOpen(true);
@@ -233,7 +225,7 @@ const TerminalComponent = ({ isFloating = false }) => {
               </div>
             ))}
             
-            {showPrompt && (
+            {/* showPrompt && (
               <div className="flex items-center text-deadsec-purple sticky bottom-0 bg-deadsec-dark">
                 <span className="animate-pulse">{'> '}</span>
                 <input
@@ -245,7 +237,7 @@ const TerminalComponent = ({ isFloating = false }) => {
                   autoFocus
                 />
               </div>
-            )}
+            ) */}
           </div>
         </div>
       )}

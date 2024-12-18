@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Cpu, Code } from 'lucide-react';
+import { Terminal, Cpu } from 'lucide-react';
 
 const GameSelector = ({ onSelectGame }) => {
   const games = [
@@ -7,24 +7,18 @@ const GameSelector = ({ onSelectGame }) => {
       id: 'matrix',
       title: 'Matrix Hack',
       icon: Terminal,
-      description: 'Trouvez le code secret'
+      description: 'Hackez le système en trouvant le code secret'
     },
     {
       id: 'memory',
       title: 'Memory Hack',
       icon: Cpu,
-      description: 'Connectez les paires'
-    },
-    {
-      id: 'sequence',
-      title: 'Code Sequence',
-      icon: Code,
-      description: 'Mémorisez la séquence'
+      description: 'Testez votre mémoire en reproduisant les séquences'
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {games.map(game => (
         <button 
           key={game.id}

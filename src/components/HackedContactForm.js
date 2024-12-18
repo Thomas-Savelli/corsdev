@@ -6,7 +6,7 @@ import { RECAPTCHA_CONFIG } from '../config/recaptcha';
 import { EMAIL_CONFIG } from '../config/email';
 
 const HackedContactForm = () => {
-  const [formState, setFormState] = useState('idle'); // idle, scanning, sending, success, error
+  const [formState, setFormState] = useState('idle');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,27 +42,31 @@ const HackedContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    console.log('Formulaire soumis');
+
     // Récupérer la valeur du reCAPTCHA
     const recaptchaValue = recaptchaRef.current.getValue();
     if (!recaptchaValue) {
-      alert('Veuillez valider le captcha');
       return;
     }
 
-    setFormState('scanning');
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setFormState('sending');
-
-    const success = await sendEmail(formData, recaptchaValue);
-    
-    if (success) {
-      setFormState('success');
-      setFormData({ name: '', email: '', message: '' });
-      recaptchaRef.current.reset();
-    } else {
+    try {
+      setFormState('scanning');
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      setFormState('sending');
+      const success = await sendEmail(formData, recaptchaValue);
+      
+      if (success) {
+        setFormState('success');
+        setFormData({ name: '', email: '', message: '' });
+        recaptchaRef.current.reset();
+      } else {
+        setFormState('error');
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
       setFormState('error');
-      recaptchaRef.current.reset();
     }
 
     setTimeout(() => {
@@ -70,12 +74,17 @@ const HackedContactForm = () => {
     }, 3000);
   };
 
+  const handleInputChange = (e) => {
+    console.log('Input changé:', e.target.name);
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
-    <div className="
-      bg-deadsec-dark border border-deadsec-blue/30 
-      p-4 md:p-6 rounded-sm relative overflow-hidden
-      w-full md:w-auto max-w-full md:max-w-none
-    ">
+    <div className="bg-deadsec-dark border border-deadsec-blue/30 p-4 md:p-6 rounded-sm relative overflow-hidden z-20">
       {/* Effet de scan */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deadsec-blue/5 to-transparent opacity-50 animate-scan"></div>
 
@@ -100,16 +109,17 @@ const HackedContactForm = () => {
       </div>
 
       {/* Formulaire */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 relative">
         <div className="space-y-1">
           <label className="block text-sm font-mono text-deadsec-blue">
             <span className="text-deadsec-purple">&gt;</span> Identifiant
           </label>
           <input
             type="text"
+            name="name"
             value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors px-3 py-2 md:py-3"
+            onChange={handleInputChange}
+            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors"
             placeholder="John Doe"
             required
           />
@@ -121,9 +131,10 @@ const HackedContactForm = () => {
           </label>
           <input
             type="email"
+            name="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors px-3 py-2 md:py-3"
+            onChange={handleInputChange}
+            className="w-full bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors"
             placeholder="john@example.com"
             required
           />
@@ -134,23 +145,26 @@ const HackedContactForm = () => {
             <span className="text-deadsec-purple">&gt;</span> Message
           </label>
           <textarea
+            name="message"
             value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full h-32 bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors resize-none px-3 py-2 md:py-3"
+            onChange={handleInputChange}
+            className="w-full h-32 bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors resize-none"
             placeholder="Entrez votre message..."
             required
           />
         </div>
 
-        <div className="flex justify-center scale-75 md:scale-100">
+        <div className="flex justify-center">
           <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={RECAPTCHA_CONFIG.siteKey}
             theme="dark"
-            className="transform scale-90 -mx-4"
             size="normal"
             onChange={(value) => {
-              console.log("reCAPTCHA validé:", !!value);
+              console.log("reCAPTCHA value:", value);
+            }}
+            onErrored={(err) => {
+              console.error("reCAPTCHA error:", err);
             }}
           />
         </div>

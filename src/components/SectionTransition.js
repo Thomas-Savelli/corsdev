@@ -1,20 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
 
 const SectionTransition = ({ children, className = '' }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
-
   return (
     <div
-      ref={ref}
-      className={`transform transition-all duration-1000 ${
-        inView
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-10'
-      } ${className}`}
+      className={`transform transition-all duration-1000 ${className}`}
     >
       {/* Effet de scan */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deadsec-blue/5 to-transparent opacity-0 group-hover:opacity-30 transition-opacity"></div>

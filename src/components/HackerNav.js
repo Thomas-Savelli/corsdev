@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Code, Network, Mail, Monitor, Server, Database } from 'lucide-react';
+import { Terminal, Code, Network, Mail, Monitor, Server } from 'lucide-react';
 
 const HackerNav = ({ className }) => {
   const [activeSection, setActiveSection] = useState('');
@@ -82,12 +82,17 @@ const HackerNav = ({ className }) => {
       return;
     }
 
-    // Effet de "compilation" avant le scroll
-    setTimeout(() => {
+    // Ajout d'un try-catch pour la gestion d'erreurs
+    try {
       const section = document.getElementById(sectionId);
-      section.scrollIntoView({ behavior: 'smooth' });
-      setIsHacking(false);
-    }, 500);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } catch (error) {
+      console.error('Erreur de navigation:', error);
+    }
+    
+    setIsHacking(false);
   };
 
   // Version mobile

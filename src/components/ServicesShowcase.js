@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Server, Code, Terminal, Settings, Cloud, Shield, Workflow } from 'lucide-react';
+import { Globe, Server, Code, Terminal, Settings, Cloud, Workflow } from 'lucide-react';
 
 const ServicesShowcase = () => {
   const [activeService, setActiveService] = useState(null);
@@ -93,12 +93,11 @@ const ServicesShowcase = () => {
           return (
             <div 
               key={index}
-              className={`
-                bg-deadsec-dark border border-${service.color}/30 p-6 rounded-sm 
-                relative group cursor-pointer overflow-hidden
-                hover:border-${service.color} transition-all duration-300
-              `}
-              onClick={() => setActiveService(activeService === index ? null : index)}
+              className="bg-deadsec-dark border border-deadsec-blue/30 p-6 rounded-sm relative cursor-pointer"
+              onClick={() => {
+                console.log('Clic sur service:', index);
+                setActiveService(activeService === index ? null : index);
+              }}
             >
               {/* Effet de scan */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deadsec-blue/5 to-transparent opacity-0 group-hover:opacity-50 animate-scan"></div>

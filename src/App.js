@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import photoThomas from './assets/images/photo.jpeg';
-import { Terminal as TerminalIcon, Github, Mail, Code, Monitor, Database } from 'lucide-react';
+import { Github, Mail, Code, Monitor, Database } from 'lucide-react';
 import TerminalComponent from './components/Terminal';
 import SkillCard from './components/SkillCard';
 import Timeline from './components/Timeline';
@@ -14,28 +14,27 @@ import useEasterEggs from './hooks/useEasterEggs';
 import useNotifications from './hooks/useNotifications';
 import DedsecNotification from './components/DedsecNotification';
 import ThreeDBackground from './components/ThreeDBackground';
-import useSoundSystem from './hooks/useSoundSystem';
-import useMatrixMode from './hooks/useMatrixMode';
 import HackerNav from './components/HackerNav';
 import ServicesShowcase from './components/ServicesShowcase';
-import SequenceGame from './components/SequenceGame';
 
 function App() {
   const [gameState, setGameState] = useState({
     selectedGame: null,
     isPlaying: false
   });
-  const { notifications, addNotification, removeNotification } = useNotifications();
-  const { playSound } = useSoundSystem();
-  const { isMatrixMode, startMatrixMode, stopMatrixMode } = useMatrixMode();
+  const { notifications, removeNotification } = useNotifications();
   useEasterEggs();
 
   const handleGameSelect = (gameId) => {
-    console.log('App handling game selection:', gameId);
-    setGameState({
-      selectedGame: gameId,
-      isPlaying: true
-    });
+    console.log('Tentative de sélection du jeu:', gameId);
+    try {
+      setGameState({
+        selectedGame: gameId,
+        isPlaying: true
+      });
+    } catch (error) {
+      console.error('Erreur lors de la sélection du jeu:', error);
+    }
   };
 
   const handleGameReturn = () => {
@@ -56,48 +55,17 @@ function App() {
         return <HackingGame onReturn={handleGameReturn} />;
       case 'memory':
         return <MemoryGame onReturn={handleGameReturn} />;
-      case 'sequence':
-        return <SequenceGame onReturn={handleGameReturn} />;
       default:
         return <GameSelector onSelectGame={handleGameSelect} />;
     }
   };
 
-  const handleSuccessfulHack = () => {
-    addNotification('Système piraté avec succès !');
-  };
-
-  const handleInteraction = (type) => {
-    switch(type) {
-      case 'hover':
-        playSound('hover');
-        break;
-      case 'click':
-        playSound('click');
-        break;
-      case 'success':
-        playSound('success');
-        break;
-      // etc.
-    }
-  };
-
-  useEffect(() => {
-    const handleHover = () => playSound('hover');
-    const handleClick = () => playSound('click');
-
-    document.addEventListener('mouseover', handleHover);
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('mouseover', handleHover);
-      document.removeEventListener('click', handleClick);
-    };
-  }, [playSound]);
-
   return (
-    <div className="min-h-screen bg-deadsec-dark relative overflow-hidden">
-      <ThreeDBackground />
+    <div className="min-h-screen bg-deadsec-dark relative">
+      <div className="pointer-events-none">
+        <ThreeDBackground />
+      </div>
+
       <HackerNav className="z-[100]" />
       
       {/* Grille de fond animée - Ajout de pointer-events-none */}
@@ -112,10 +80,10 @@ function App() {
       {/* Terminal flottant avec z-index élevé */}
       <TerminalComponent isFloating={true} />
 
-      <main className="pt-16 md:pt-20">
+      <main className="relative z-10 pt-16 md:pt-20">
         {/* Hero Section */}
         <SectionTransition>
-          <section className="h-[70vh] flex items-center relative pb-0 mt-10">
+          <section id="home" className="h-[70vh] flex items-center relative pb-0 mt-10">
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-gradient-to-r from-deadsec-dark via-deadsec-dark/95 to-transparent"></div>
             </div>
@@ -145,22 +113,25 @@ function App() {
                   </div>
                   
                   <div className="flex space-x-4">
-                    <a 
-                      href="#contact"
+                    <button 
+                      onClick={() => {
+                        const contactSection = document.getElementById('contact');
+                        if (contactSection) {
+                          contactSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
                       className="px-6 py-3 bg-deadsec-blue/10 border border-deadsec-blue text-deadsec-blue hover:bg-deadsec-blue/20 hover:text-deadsec-purple transition-all flex items-center space-x-2"
                     >
                       <Mail className="animate-pulse" size={20} />
                       <span>CONNECT</span>
-                    </a>
-                    <a 
-                      href="https://github.com/Thomas-Savelli"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    </button>
+                    <button 
+                      onClick={() => window.open('https://github.com/Thomas-Savelli', '_blank')}
                       className="px-6 py-3 bg-deadsec-gray/50 hover:bg-deadsec-gray hover:text-deadsec-purple transition-all flex items-center space-x-2"
                     >
                       <Github size={20} />
                       <span>SOURCE</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
 
@@ -287,7 +258,13 @@ function App() {
               </div>
               
               <div className="relative">
-                {renderGameContent()}
+                <div onClick={(e) => e.stopPropagation()}>
+                  {gameState.isPlaying ? (
+                    renderGameContent()
+                  ) : (
+                    <GameSelector onSelectGame={handleGameSelect} />
+                  )}
+                </div>
               </div>
             </div>
           </section>

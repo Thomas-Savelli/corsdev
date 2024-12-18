@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, Unlock, RefreshCw, Delete } from 'lucide-react';
 
 const HackingGame = ({ onReturn }) => {
   const [gameState, setGameState] = useState('idle');
   const [attempts, setAttempts] = useState(8);
   const [code, setCode] = useState('');
   const [guess, setGuess] = useState([]);
-  const [feedback, setFeedback] = useState('');
   const [timeLeft, setTimeLeft] = useState(120);
   const [history, setHistory] = useState([]); // Pour garder trace des tentatives précédentes
 
@@ -22,7 +20,6 @@ const HackingGame = ({ onReturn }) => {
     setAttempts(8);
     setGuess([]);
     setTimeLeft(120);
-    setFeedback('');
     setHistory([]);
     generateCode();
   };
@@ -62,7 +59,6 @@ const HackingGame = ({ onReturn }) => {
     if (guessStr === code) {
       setGameState('success');
     } else {
-      setFeedback(`${correctPositions} bien placé(s), ${wrongPositions} mal placé(s)`);
       setAttempts(prev => prev - 1);
       if (attempts <= 1) {
         setGameState('failed');
@@ -109,7 +105,7 @@ const HackingGame = ({ onReturn }) => {
           onClick={handleDelete}
           className="w-12 h-12 border border-deadsec-purple text-deadsec-purple hover:bg-deadsec-purple/10 transition-colors"
         >
-          <Delete className="w-6 h-6 mx-auto" />
+          <Terminal className="w-6 h-6 mx-auto" />
         </button>
       </div>
     );

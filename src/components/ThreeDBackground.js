@@ -6,25 +6,35 @@ const ThreeDBackground = () => {
   const mousePosition = useRef({ x: 0, y: 0 });
   const particlesMeshRef = useRef();
   const gridHelperRef = useRef();
+  const rendererRef = useRef();
+  const sceneRef = useRef();
+  const cameraRef = useRef();
 
   useEffect(() => {
+    const currentContainer = containerRef.current;
+
     // Configuration de base
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
+
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
+    cameraRef.current = camera;
     camera.position.z = 5;
 
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true,
       antialias: true 
     });
+    rendererRef.current = renderer;
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    containerRef.current.appendChild(renderer.domElement);
+    currentContainer.appendChild(renderer.domElement);
 
     // Grille améliorée
     const gridHelper = new THREE.GridHelper(30, 30, 0x00fff9, 0xFF00FF);
@@ -127,7 +137,9 @@ const ThreeDBackground = () => {
         gridHelperRef.current.position.y = -2 + Math.sin(time * 0.001) * 0.2;
       }
 
-      renderer.render(scene, camera);
+      if (rendererRef.current && sceneRef.current && cameraRef.current) {
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+      }
       requestAnimationFrame(animate);
     };
 
@@ -145,7 +157,9 @@ const ThreeDBackground = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      if (currentContainer && rendererRef.current) {
+        currentContainer.removeChild(rendererRef.current.domElement);
+      }
     };
   }, []);
 

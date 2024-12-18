@@ -7,7 +7,10 @@ const ProjectFilter = ({ categories, activeCategory, setActiveCategory }) => {
       {categories.map((category) => (
         <button
           key={category}
-          onClick={() => setActiveCategory(category)}
+          onClick={(e) => {
+            e.preventDefault();
+            setActiveCategory(category);
+          }}
           className={`
             flex items-center space-x-2 px-4 py-2 
             border transition-all duration-300
