@@ -225,19 +225,19 @@ const TerminalComponent = ({ isFloating = false }) => {
               </div>
             ))}
             
-            {/* showPrompt && (
-              <div className="flex items-center text-deadsec-purple sticky bottom-0 bg-deadsec-dark">
-                <span className="animate-pulse">{'> '}</span>
-                <input
-                  type="text"
-                  value={currentCommand}
-                  onChange={(e) => setCurrentCommand(e.target.value)}
-                  onKeyDown={handleCommand}
-                  className="bg-transparent outline-none flex-1 ml-1 focus:text-deadsec-blue transition-colors"
-                  autoFocus
-                />
-              </div>
-            ) */}
+            {/* showPrompt && ( */}
+            <div className="flex items-center text-deadsec-purple sticky bottom-0 bg-deadsec-dark">
+              <span className="animate-pulse">{'> '}</span>
+              <input
+                type="text"
+                value={currentCommand}
+                onChange={(e) => setCurrentCommand(e.target.value)}
+                onKeyDown={handleCommand}
+                className="bg-transparent outline-none flex-1 ml-1 focus:text-deadsec-blue transition-colors"
+                autoFocus
+              />
+            </div>
+            {/* ) */}
           </div>
         </div>
       )}

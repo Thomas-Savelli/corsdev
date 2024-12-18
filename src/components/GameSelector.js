@@ -22,7 +22,10 @@ const GameSelector = ({ onSelectGame }) => {
       {games.map(game => (
         <button 
           key={game.id}
-          onClick={() => onSelectGame(game.id)}
+          onClick={() => {
+            console.log('Sélection du jeu:', game.id);
+            onSelectGame(game.id);
+          }}
           className="bg-deadsec-dark p-6 border border-deadsec-blue text-left hover:bg-deadsec-blue/5 hover:border-deadsec-purple transition-all duration-300"
         >
           <div className="flex items-center gap-4">

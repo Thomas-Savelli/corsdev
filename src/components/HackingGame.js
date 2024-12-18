@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Terminal } from 'lucide-react';
 
 const HackingGame = ({ onReturn }) => {
   const [gameState, setGameState] = useState('idle');
