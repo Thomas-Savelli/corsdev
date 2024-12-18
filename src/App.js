@@ -17,7 +17,6 @@ import ThreeDBackground from './components/ThreeDBackground';
 import useSoundSystem from './hooks/useSoundSystem';
 import useMatrixMode from './hooks/useMatrixMode';
 import HackerNav from './components/HackerNav';
-import TechnicalShowcase from './components/TechnicalShowcase';
 import ServicesShowcase from './components/ServicesShowcase';
 import SequenceGame from './components/SequenceGame';
 
@@ -211,21 +210,19 @@ function App() {
                   icon={Monitor}
                   title="Frontend"
                   skills={[
+                    'HTML5 / CSS3 / Java Script',
                     'React.js / Next.js',
-                    'JavaScript / TypeScript',
-                    'HTML5 / CSS3',
                     'Tailwind CSS',
-                    'Redux / Context API'
+                    'Context API'
                   ]}
                 />
-                
+
                 <SkillCard 
                   icon={Database}
                   title="Backend"
                   skills={[
                     'Python / Django',
-                    'Node.js / Express',
-                    'PostgreSQL / MySQL',
+                    'PostgreSQL / MySQL / NoSQL',
                     'API REST / GraphQL',
                     'Docker / CI/CD'
                   ]}
@@ -237,9 +234,10 @@ function App() {
                   title="Autres"
                   skills={[
                     'Git / GitHub',
-                    'Linux / Bash',
-                    'Cybersécurité',
                     'Tests unitaires',
+                    'Nginx / Apache',
+                    'Linux / Bash',
+                    'Render / OVH',
                     'Méthodologie Agile'
                   ]}
                   color="deadsec-green"

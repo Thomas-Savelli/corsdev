@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send, Lock, Unlock, Shield, Terminal } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { RECAPTCHA_CONFIG } from '../config/recaptcha';
+import { EMAIL_CONFIG } from '../config/email';
 
 const HackedContactForm = () => {
   const [formState, setFormState] = useState('idle'); // idle, scanning, sending, success, error
@@ -8,19 +12,62 @@ const HackedContactForm = () => {
     email: '',
     message: ''
   });
+  const recaptchaRef = useRef(null);
 
-  const simulateHacking = async () => {
-    setFormState('scanning');
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setFormState('sending');
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setFormState('success');
+  const sendEmail = async (formData, recaptchaToken) => {
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        'g-recaptcha-response': recaptchaToken
+      };
+
+      const result = await emailjs.send(
+        EMAIL_CONFIG.serviceId,
+        EMAIL_CONFIG.templateId,
+        templateParams,
+        EMAIL_CONFIG.publicKey
+      );
+
+      if (result.status === 200) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      return false;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    simulateHacking();
-    // Ajoutez ici la vraie logique d'envoi
+    
+    // Récupérer la valeur du reCAPTCHA
+    const recaptchaValue = recaptchaRef.current.getValue();
+    if (!recaptchaValue) {
+      alert('Veuillez valider le captcha');
+      return;
+    }
+
+    setFormState('scanning');
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setFormState('sending');
+
+    const success = await sendEmail(formData, recaptchaValue);
+    
+    if (success) {
+      setFormState('success');
+      setFormData({ name: '', email: '', message: '' });
+      recaptchaRef.current.reset();
+    } else {
+      setFormState('error');
+      recaptchaRef.current.reset();
+    }
+
+    setTimeout(() => {
+      setFormState('idle');
+    }, 3000);
   };
 
   return (
@@ -88,6 +135,19 @@ const HackedContactForm = () => {
             className="w-full h-32 bg-deadsec-gray/10 border border-deadsec-blue/30 p-3 text-white font-mono focus:border-deadsec-purple focus:outline-none transition-colors resize-none"
             placeholder="Entrez votre message..."
             required
+          />
+        </div>
+
+        <div className="flex justify-center">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={RECAPTCHA_CONFIG.siteKey}
+            theme="dark"
+            className="transform scale-90 -mx-4"
+            size="normal"
+            onChange={(value) => {
+              console.log("reCAPTCHA validé:", !!value);
+            }}
           />
         </div>
 

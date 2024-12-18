@@ -33,20 +33,20 @@ const Timeline = () => {
   const events = [
     {
       date: "2023 - Présent",
-      title: "Développeur Full Stack",
-      description: "Développement d'applications web modernes avec React et Django",
+      title: "Projets Freelance",
+      description: "Réalisation de projets web ou local pour divers clients.",
       icon: Briefcase
     },
     {
-      date: "2022 - 2023",
-      title: "Formation OpenClassrooms",
-      description: "Formation intensive en développement web et cybersécurité",
+      date: "2023 - 2024",
+      title: "Dîplome de Niveau 6 (Bac +4)",
+      description: "Développeur d'applications Python",
       icon: GraduationCap
     },
     {
-      date: "2021 - 2022",
-      title: "Projets Freelance",
-      description: "Réalisation de projets web pour divers clients",
+      date: "2022 - 2023",
+      title: "Reconversion professionnelle",
+      description: "Après dix ans dans le domaine de l'aéroportuaire, j'ai décidé de me reconvertir dans ma passion, l'informatique !",
       icon: Award
     },
     // Ajoutez d'autres événements ici

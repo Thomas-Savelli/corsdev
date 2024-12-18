@@ -23,29 +23,29 @@ const TerminalComponent = ({ isFloating = false }) => {
       ├── about         : À propos de moi
       ├── services      : Liste mes services
       ├── contact       : Mes informations de contact
-      ├── experience    : Mon parcours professionnel
+      ├── timeline      : Mon parcours professionnel
       ├── clear         : Efface le terminal
       └── matrix        : Mode Matrix
     `,
     skills: `
       > Compétences principales :
       ├── Frontend
+      │   ├── HTML5 / CSS3 / Java Script
+      │   ├── SASS
       │   ├── React.js / Next.js
-      │   ├── TypeScript / JavaScript
-      │   ├── TailwindCSS / CSS3
-      │   └── Redux / Context API
+      │   ├── TailwindCSS
+      │   └── Context API
       │
       ├── Backend
       │   ├── Python / Django
-      │   ├── FastAPI / REST
-      │   ├── PostgreSQL / SQL
-      │   └── Node.js / Express
+      │   ├── API REST
+      │   └── PostgreSQL / MySQL / NoSQL
       │
       └── DevOps
           ├── Docker / Linux
           ├── Git / GitHub Actions
-          ├── AWS / Cloud
-          └── Nginx / Apache
+          ├── Nginx / Apache
+          └── Render / OVH
     `,
     services: `
       > Services proposés :
@@ -77,22 +77,24 @@ const TerminalComponent = ({ isFloating = false }) => {
       │   └── Solutions SaaS
       └── Mission: Créer des applications performantes et évolutives
     `,
-    experience: `
-      > Expérience professionnelle :
-      ├── Développeur Full Stack
-      │   └── Création d'applications web et APIs
+    timeline: `
+      > Timeline :
+      ├── 2023 - Présent
+      │   └── Projets Freelance
+      │       └── Réalisation de projets web ou local pour divers clients.
+      ├── 2023 - 2024
+      │   └── Dîplome de Niveau 6 (Bac +4)
+      │       └── Développeur d'applications Python
       │
-      ├── Développeur Backend
-      │   └── Conception d'architectures robustes
-      │
-      └── DevOps
-          └── Mise en place d'infrastructures cloud
+      └── 2022 - 2023
+          └── Reconversion professionnelle
+              └── Après dix ans dans le domaine de l'aéroportuaire, j'ai décidé de me reconvertir dans ma passion, l'informatique !
     `,
     contact: `
       > Contact :
-      ├── Email: votre@email.com
-      ├── GitHub: github.com/votre-compte
-      └── LinkedIn: linkedin.com/in/votre-profil
+      ├── Email: thomas.savelli@corsdev.com
+      ├── GitHub: https://github.com/Thomas-Savelli
+      └── LinkedIn: https://www.linkedin.com/in/thomas-savelli
     `,
     matrix: () => {
       if (isMatrixMode) {

@@ -41,7 +41,7 @@ const ServicesShowcase = () => {
         "Systèmes de facturation",
         "Tableaux de bord analytiques"
       ],
-      technologies: ["AWS", "Docker", "Node.js", "Stripe"],
+      technologies: ["Render", "PythonAnyWhere", "OVH", "Docker", "Node.js", "Stripe"],
       color: "deadsec-green"
     },
     {
@@ -54,7 +54,7 @@ const ServicesShowcase = () => {
         "Tests automatisés",
         "Déploiement automatisé"
       ],
-      technologies: ["Python", "Bash", "GitHub Actions", "Jest"],
+      technologies: ["Python", "Bash", "GitHub Actions"],
       color: "deadsec-blue"
     },
     {
